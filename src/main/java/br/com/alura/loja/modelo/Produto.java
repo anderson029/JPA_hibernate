@@ -15,6 +15,24 @@ public class Produto {
 	/* @Column(name = "desc") Informar ao JPA que o nome da coluna no BD é diferente do nome do atributo.*/
 	private String descricao;
 	private BigDecimal preco;
+	private LocalDate dataCadastro = LocalDate.now();
+
+	public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.categoria = categoria;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;

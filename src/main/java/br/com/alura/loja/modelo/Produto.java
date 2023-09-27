@@ -1,7 +1,7 @@
 package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
-
+import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity // importar configurações do BD
@@ -9,13 +9,18 @@ import javax.persistence.*;
 public class Produto {
 
 	@Id // informar que o atributo "id" é a chave primária;
-	@GeneratedValue(strategy = GenerationType.IDENTITY)// o valor da chave primária vai ser gerada pelo banco de dados
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // o valor da chave primária vai ser gerada pelo banco de dados com o id
 	private Long id;
 	private String nome;
 	/* @Column(name = "desc") Informar ao JPA que o nome da coluna no BD é diferente do nome do atributo.*/
 	private String descricao;
 	private BigDecimal preco;
 	private LocalDate dataCadastro = LocalDate.now();
+
+	//@Enumerated(EnumType.ORDINAL) // Ordenar as constantes, para cadastrar por nome e não a ordem que está no enum categoria
+
+	@ManyToOne // informar que uma categoria pode ter vários produtos (1 - *)
+	private Categoria categoria;
 
 	public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
 		this.nome = nome;
@@ -31,8 +36,6 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-
-	private Categoria categoria;
 
 	public Long getId() {
 		return id;

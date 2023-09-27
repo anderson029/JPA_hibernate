@@ -15,4 +15,11 @@ public class CategoriaDao {
         this.em.persist(categoria);
     }
 
+    public void atualizar (Categoria categoria){
+        this.em.merge(categoria);
+    }
+    public void remover(Categoria categoria) {
+        categoria = em.merge(categoria);// reatribuir a entidade para garantir que volte ao estado MANAGED, assim é possível remover o objeto
+        this.em.remove(categoria);
+    }
 }

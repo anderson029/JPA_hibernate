@@ -18,9 +18,11 @@ public class Produto {
 	private LocalDate dataCadastro = LocalDate.now();
 
 	//@Enumerated(EnumType.ORDINAL) // Ordenar as constantes, para cadastrar por nome e não a ordem que está no enum categoria
-
 	@ManyToOne // informar que uma categoria pode ter vários produtos (1 - *)
 	private Categoria categoria;
+
+	public Produto() { // é preciso de um construtor padrão ao realizar merge() na jpa.
+	}
 
 	public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
 		this.nome = nome;
